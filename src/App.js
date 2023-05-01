@@ -70,6 +70,13 @@ function App() {
                 Согласие с правилами
               </Typography>
               <Box sx={{
+                textAlign: 'center'
+              }}>
+                <Typography variant="h7">
+                  Для данной функции применяются особые условия и правила пользования, их необходимо подтвердить, нажав на кнопку Подтвердить
+                </Typography>
+              </Box>
+              <Box sx={{
                 width: '90%'
               }}>
                 <Button
@@ -79,7 +86,7 @@ function App() {
                     setOpenModal(false)
                   }}
                 >
-                  Сохранить
+                  Подтвердить
                 </Button>
                 <Button
                   variant="outlined"
