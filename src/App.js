@@ -17,7 +17,7 @@ function App() {
   const [isAccepted, setIsAccepted] = useState(false);
 
   const handleClose = (event, reason) => {
-    if (reason && reason == "backdropClick" || reason == "escapeKeyDown") return;
+    if (reason === "backdropClick" || reason === "escapeKeyDown") return;
     setOpenModal(false)
     setCountdown(5)
   }
@@ -33,7 +33,7 @@ function App() {
 
     setTimeout(() => { 
       clearInterval(timer); 
-    }, 5000);
+    }, 5900);
   }
 
   return (
