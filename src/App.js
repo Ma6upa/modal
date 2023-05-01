@@ -13,9 +13,21 @@ import {
 function App() {
   const theme = createTheme();
   const [openModal, setOpenModal] = useState(false);
+  const [countdown, setCountdown] = useState(5);
 
   const handleClose = () => {
     setOpenModal(false)
+    setCountdown(5)
+  }
+
+  const startCountdown = () => {
+    let timer = setInterval(() => {
+      setCountdown((countdown) => countdown - 1)
+    }, 1000);
+
+    setTimeout(() => { 
+      clearInterval(timer); 
+    }, 5000);
   }
 
   return (
@@ -36,6 +48,7 @@ function App() {
               sx={{ mt: 3, mb: 2 }}
               onClick={() => {
                 setOpenModal(true)
+                startCountdown()
               }}
             >
               Выполнить действие
@@ -85,8 +98,9 @@ function App() {
                   onClick={() => {
                     setOpenModal(false)
                   }}
+                  disabled={Boolean(countdown)} 
                 >
-                  Подтвердить
+                  Подтвердить ({countdown})
                 </Button>
                 <Button
                   variant="outlined"
