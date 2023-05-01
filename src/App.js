@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
   Box,
   Button,
@@ -14,12 +14,17 @@ function App() {
   const theme = createTheme();
   const [openModal, setOpenModal] = useState(false);
   const [countdown, setCountdown] = useState(5);
+  const [isAccepted, setIsAccepted] = useState(false);
 
   const handleClose = (event, reason) => {
     if (reason && reason == "backdropClick" || reason == "escapeKeyDown") return;
     setOpenModal(false)
     setCountdown(5)
   }
+
+  useEffect(() => {
+    if (isAccepted) setTimeout(() => alert('Действие выполнено'), 10)
+  },[isAccepted])
 
   const startCountdown = () => {
     let timer = setInterval(() => {
@@ -48,9 +53,13 @@ function App() {
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
               onClick={() => {
-                setOpenModal(true)
-                setCountdown(5)
-                startCountdown()
+                if(isAccepted) {
+                  alert('Действие выполнено')
+                } else {
+                  setOpenModal(true)
+                  setCountdown(5)
+                  startCountdown()
+                }
               }}
             >
               Выполнить действие
@@ -99,10 +108,11 @@ function App() {
                   sx={{ mt: 3, mb: 2, float: 'right' }}
                   onClick={() => {
                     setOpenModal(false)
+                    setIsAccepted(true)
                   }}
                   disabled={Boolean(countdown)} 
                 >
-                  Подтвердить ({countdown})
+                  {countdown > 0? `Подтвердить (${countdown})` : `Подтвердить`}
                 </Button>
                 <Button
                   variant="outlined"
