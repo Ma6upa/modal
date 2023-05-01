@@ -15,7 +15,8 @@ function App() {
   const [openModal, setOpenModal] = useState(false);
   const [countdown, setCountdown] = useState(5);
 
-  const handleClose = () => {
+  const handleClose = (event, reason) => {
+    if (reason && reason == "backdropClick" || reason == "escapeKeyDown") return;
     setOpenModal(false)
     setCountdown(5)
   }
@@ -48,6 +49,7 @@ function App() {
               sx={{ mt: 3, mb: 2 }}
               onClick={() => {
                 setOpenModal(true)
+                setCountdown(5)
                 startCountdown()
               }}
             >
@@ -108,6 +110,7 @@ function App() {
                   onClick={() => {
                     setOpenModal(false)
                   }}
+                  disabled={Boolean(countdown)} 
                 >
                   Отменить
                 </Button>
